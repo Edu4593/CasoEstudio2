@@ -1,10 +1,12 @@
 public class Cola {
     private Nodo frente;
     private Nodo fin;
+    private int tamano;
 
     public Cola() {
         this.frente = null;
         this.fin = null;
+        this.tamano = 0;
     }
 
     // Método para insertar un elemento en la cola
@@ -17,6 +19,7 @@ public class Cola {
             fin.siguiente = nuevo;
             fin = nuevo;
         }
+        this.tamano++;
     }
 
     // Método para extraer un elemento de la cola
@@ -29,6 +32,7 @@ public class Cola {
         if (frente == null) {
             fin = null;
         }
+        this.tamano--;
         return dato;
     }
 
@@ -40,6 +44,29 @@ public class Cola {
     // Método para obtener el último elemento sin extraerlo
     public Object obtenerUltimo() {
         return (fin != null) ? fin.dato : null;
+    }
+
+    // Método para obtener el elemento de la cola en la posición que indique el usuario
+    public Object obtenerElementoEnPosicion(int posicion) {
+        if (posicion < 1 || posicion > this.tamano) {
+            return null;
+        }
+
+        Nodo actual = frente;
+        for (int i = 1; i < posicion; i++) {
+            actual = actual.siguiente;
+        }
+        return actual.dato;
+    }
+
+    // ¿La cola está vacía? (Opción 6)
+    public boolean estaVacia() {
+        return frente == null;
+    }
+
+    // Tamaño actual de la cola
+    public int obtenerTamano() {
+        return this.tamano;
     }
 
     // Método para mostrar la cola
